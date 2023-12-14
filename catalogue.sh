@@ -7,7 +7,7 @@ N="\e[0m"
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
-MONGODB_HOST="172.31.34.122"
+MONGODB_HOST= 172.31.34.122
 
 echo "script stareted executing at $TIMESTAMP" &>> $LOGFILE
 
@@ -58,7 +58,8 @@ VALIDATE(){
     npm install &>> $LOGFILE
     VALIDATE $? "Installing the npm"
 
-    cp C:/Users/v-ragalla/daws/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+    #cp C:/Users/v-ragalla/daws/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+    cp /home/centos//roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
     VALIDATE $? "copying the catalogue service"
 
     systemctl daemon-reload &>> $LOGFILE
@@ -70,7 +71,8 @@ VALIDATE(){
     systemctl start catalogue &>> $LOGFILE
     VALIDATE $? "start the catalogue"
 
-    cp C:/Users/v-ragalla/daws/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+    #cp C:/Users/v-ragalla/daws/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+    cp /home/centos//roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
     VALIDATE $? "copying the mongodb repo "
 
     dnf install mongodb-org-shell -y &>> $LOGFILE
