@@ -7,7 +7,7 @@ N="\e[0m"
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
-MONGODB_HOST= 172.31.34.122
+#MONGODB_HOST= 172.31.34.122
 
 echo "script stareted executing at $TIMESTAMP" &>> $LOGFILE
 
@@ -59,7 +59,7 @@ VALIDATE(){
     VALIDATE $? "Installing the npm"
 
     #cp C:/Users/v-ragalla/daws/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
-    cp /home/centos//roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+    cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
     VALIDATE $? "copying the catalogue service"
 
     systemctl daemon-reload &>> $LOGFILE
@@ -72,11 +72,11 @@ VALIDATE(){
     VALIDATE $? "start the catalogue"
 
     #cp C:/Users/v-ragalla/daws/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
-    cp /home/centos//roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+    cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
     VALIDATE $? "copying the mongodb repo "
 
     dnf install mongodb-org-shell -y &>> $LOGFILE
     VALIDATE $? "install the mongodb client"
 
-    mongo --host $MONGODB_HOST </app/schema/catalogue.js
+    mongo --host 172.31.34.122 </app/schema/catalogue.js
     VALIDATE $? "Loading catalouge data into MongoDB"
