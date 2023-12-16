@@ -27,7 +27,7 @@ VALIDATE(){
         echo "you are root user "
     fi # fi means reverse of if, indicating condition end
 
-    dnf install python36 gcc python3-devel -y
+    dnf install python36 gcc python3-devel -y &>> $LOGFILE
     VALIDATE $? " install python "
 
      id roboshop
@@ -39,7 +39,7 @@ VALIDATE(){
         echo -e "roboshop user already exist  $Y SKIPPING $N"
     fi
 
-    mkdir -p /app
+    mkdir -p /app &>> $LOGFILE
     VALIDATE $? "creating the app directory"
 
     curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip &>> $LOGFILE
