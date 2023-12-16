@@ -78,5 +78,5 @@ VALIDATE(){
     dnf install mongodb-org-shell -y &>> $LOGFILE
     VALIDATE $? "install the mongodb client"
 
-    mongo --host 172.31.34.122 </app/schema/catalogue.js
+    mongo --host 172.31.34.59 </app/schema/catalogue.js
     VALIDATE $? "Loading catalouge data into MongoDB"
