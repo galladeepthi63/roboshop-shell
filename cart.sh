@@ -24,13 +24,13 @@ VALIDATE(){
     else 
         echo "you are root user "
     fi # fi means reverse of if, indicating condition end
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>> $LOGFILE
 VALIDATE $? "disable the nodejs"
 
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>> $LOGFILE
 VALIDATE $? "enable the nodejs"
 
-dnf install nodejs -y
+dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "install the nodejs"
 
  id roboshop
@@ -45,25 +45,25 @@ VALIDATE $? "install the nodejs"
     mkdir -p /app
     VALIDATE $? "creating the app directory"
 
-curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip
+curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOGFILE
 VALIDATE $? "Download the cart application"
 
 cd /app 
-unzip /tmp/cart.zip
+unzip /tmp/cart.zip &>> $LOGFILE
 VALIDATE $? "unzip the cart application"
 
 cd /app 
-npm install 
+npm install  &>> $LOGFILE
 VALIDATE $? "Download the depences"
 
-cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service
+cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
 VALIDATE $? "copying the car service"
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? "reload the daemon"
 
-systemctl enable cart 
+systemctl enable cart  &>> $LOGFILE
 VALIDATE $? "Enable cart"
 
-systemctl start cart
-VALIDATE $? "Start "start the cart servie"
+systemctl start cart &>> $LOGFILE
+VALIDATE $? "Start  the cart servie"
