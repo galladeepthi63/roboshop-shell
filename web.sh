@@ -52,5 +52,5 @@ VALIDATE(){
     VALIDATE $? "Copying the roboshop "
 
     systemctl restart nginx &>> $LOGFILE
-    VALIDATE $? "restart nginx server "
+    VALIDATE $? "restarted nginx"
 
