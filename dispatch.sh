@@ -27,7 +27,7 @@ VALIDATE(){
         echo "you are root user "
     fi # fi means reverse of if, indicating condition end
 
-    dnf install golang -y
+    dnf install golang -y &>> $LOGFILE
     VALIDATE $? "installing golang"
 
      id roboshop
@@ -39,35 +39,35 @@ VALIDATE(){
         echo -e "roboshop user already exist  $Y SKIPPING $N"
     fi
 
-    mkdir -p /app 
+    mkdir -p /app &>> $LOGFILE
     VALIDATE $? "Createing directory"
 
-    curl -L -o /tmp/dispatch.zip https://roboshop-builds.s3.amazonaws.com/dispatch.zip
+    curl -L -o /tmp/dispatch.zip https://roboshop-builds.s3.amazonaws.com/dispatch.zip &>> $LOGFILE
     VALIDATE $? "Downloading the dispatch application"
 
     cd /app 
-    unzip /tmp/dispatch.zip
+    unzip /tmp/dispatch.zip &>> $LOGFILE
     VALIDATE $? " Unzip dispatch application "
 
     cd /app
-    go mod init dispatch
+    go mod init dispatch &>> $LOGFILE
     VALIDATE $? "init dispatch"
 
-    go get
+    go get &>> $LOGFILE
     VALIDATE $? "go dispatch"
 
-    go build
+    go build &>> $LOGFILE
     VALIDATE $? "build dispatch"
 
-    cp /home/centos/roboshop-shell/dispatch.service /etc/systemd/system/dispatch.service
+    cp /home/centos/roboshop-shell/dispatch.service /etc/systemd/system/dispatch.service &>> $LOGFILE
     VALIDATE $? "Copying the dispatch "
 
-    systemctl daemon-reload
+    systemctl daemon-reload &>> $LOGFILE
     VALIDATE $? "Reload the dispatch "
 
-    systemctl enable dispatch 
+    systemctl enable dispatch &>> $LOGFILE
     VALIDATE $? "enable dispatch"
 
-    systemctl start dispatch
+    systemctl start dispatch &>> $LOGFILE
     VALIDATE $? "start dispatch"
     
