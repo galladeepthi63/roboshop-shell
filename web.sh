@@ -5,7 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGDB_HOST=mongodb.daws76s.online
+#MONGDB_HOST=mongodb.daws76s.online
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -38,9 +38,9 @@ systemctl enable nginx &>> $LOGFILE
 
 VALIDATE $? "Enable nginx" 
 
-systemctl start nginx &>> $LOGFILE
+systemctl start nginx 
 
-VALIDATE $? "Starting Nginx"
+#VALIDATE $? "Starting Nginx"
 
 rm -rf /usr/share/nginx/html/* &>> $LOGFILE
 
