@@ -80,5 +80,5 @@ VALIDATE(){
     dnf install mongodb-org-shell -y &>> $LOGFILE
     VALIDATE $? "install the mongodb"
     
-    mongo --host 172.31.34.59 </app/schema/user.js &>> $LOGFILE
+    mongo --host 172.31.42.159 </app/schema/user.js &>> $LOGFILE
     VALIDATE $? "access the ip address "
