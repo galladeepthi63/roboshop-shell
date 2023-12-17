@@ -27,7 +27,7 @@ VALIDATE(){
         echo "you are root user "
     fi # fi means reverse of if, indicating condition end
 
-    dnf install maven -y
+    dnf install maven -y &>> $LOGFILE
     VALIDATE $? "install the maven "
 
     id roboshop
@@ -41,36 +41,36 @@ VALIDATE(){
 
     mkdir -p /app
 
-    curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip
+    curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>> $LOGFILE
     VALIDATE $? "Downloading the shipping application "
 
     cd /app
-    unzip /tmp/shipping.zip
+    unzip /tmp/shipping.zip &>> $LOGFILE
     VALIDATE $? "unzip the shipping application "
 
     cd /app
 
-    mvn clean package
+    mvn clean package &>> $LOGFILE
     VALIDATE $? " install depenceis "
 
-    mv target/shipping-1.0.jar shipping.jar
+    mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
     VALIDATE $? "renameing the jar "
 
-    cp /home/centos/roboshop-shell/shipping.service  /etc/systemd/system/shipping.service
+    cp /home/centos/roboshop-shell/shipping.service  /etc/systemd/system/shipping.service &>> $LOGFILE
     VALIDATE $? "copying the shipping service"
 
-    systemctl daemon-reload
+    systemctl daemon-reload &>> $LOGFILE
     VALIDATE $? "reload the shipping server"
 
-    systemctl start shipping
+    systemctl start shipping &>> $LOGFILE
     VALIDATE $? " start the shipping "
 
-    dnf install mysql -y
+    dnf install mysql -y &>> $LOGFILE
     VALIDATE $? " install the mysql "
 
-    mysql -h 172.31.17.159 -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+    mysql -h 172.31.17.159 -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
     VALIDATE $? " access the mysql server "
 
-    systemctl restart shipping
+    systemctl restart shipping &>> $LOGFILE
     VALIDATE $? " restart the shipping"
 
