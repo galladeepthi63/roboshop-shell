@@ -12,7 +12,8 @@ for i in "${INSTANCES[@]}"
         else
             INSTANCE_TYPE="t2.micro"
         fi
+
     IP_ADDRESS=$(aws ec2 run-instances --image-id ami-03265a0778a880afb  --instance-type $INSTANCE_TYPE  --security-group-ids sg-0161bbc0ff4c0e791 )
-    echo "$i: $IP_ADDRESS
-    
+    echo "$i: $IP_ADDRESS"
+
 
