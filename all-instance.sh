@@ -2,7 +2,7 @@
 
 AMI=ami-03265a0778a880afb
 SG_ID=sg-0161bbc0ff4c0e791
-INSTANCES=("mongodb" "redis" "mysql" "cart" "rabbitmq" "catalogue")
+INSTANCES=("mongodb" "catalogue" "web" "redis" "user" "mysql" "cart" "rabbitmq" "shipping" "payment" "dispatch")
 ZONE_ID=Z089758214EN5STGRKQNW
 DOMAIN_NAME="ramakrishna.cloud"
 
