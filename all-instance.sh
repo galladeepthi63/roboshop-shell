@@ -3,7 +3,7 @@
 AMI=ami-03265a0778a880afb
 SG_ID=sg-0161bbc0ff4c0e791
 INSTANCES=("mongodb" "catalogue" "web" "redis" "user" "mysql" "cart" "rabbitmq" "shipping" "payment" "dispatch")
-ZONE_ID=Z089758214EN5STGRKQNW
+ZONE_ID=Z01134191WS8YPNB3E9T1
 DOMAIN_NAME="ramakrishna.cloud"
 
 for i in "${INSTANCES[@]}"
@@ -27,7 +27,7 @@ for i in "${INSTANCES[@]}"
     {
         "Comment": "Creating a record set for cognito endpoint"
         ,"Changes": [{
-        "Action"              : "CREATE"
+        "Action"              : "UPSERT"
         ,"ResourceRecordSet"  : {
             "Name"              : "'$i'.'$DOMAIN_NAME'"
             ,"Type"             : "A"
